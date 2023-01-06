@@ -91,7 +91,7 @@ pub struct Visual {
 #[derive(PartialEq, Debug)]
 pub enum Command {
 	LinkMulti(String),
-	Link(String),
+	Link(Link),
 	Unit(Unit),
 	Page(Page),
 	Border(Border),
@@ -101,12 +101,30 @@ pub enum Command {
 	EndVisual,
 }
 
+#[derive(PartialEq, Debug)]
+pub struct Link {
+	file: String,
+	sheet: Option<String>,
+}
+
 fn linkmulti(value: &str) -> Command {
 	Command::LinkMulti(value.to_string())
 }
 
 fn link(value: &str) -> Command {
-	Command::Link(value.to_string())
+	let (file, sheet) = {
+		let splitted = value.trim().trim_matches('\"').split('!').collect::<Vec<&str>>();
+		if splitted.len() == 2 {
+			(splitted[0].to_string(), Some(splitted[1].to_string()))
+		} else {
+			(splitted[0].to_string(), None)
+		}
+	};
+
+	Command::Link(Link {
+		file,
+		sheet,
+	})
 }
 
 fn unit(value: &str) -> Command {
@@ -245,6 +263,28 @@ pub fn nan_deck_parse(data: impl Into<String>) -> Vec<Command> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+
+	#[test]
+	fn link() {
+		let parsed = nan_deck_parse(r#"
+			LINK= "cards.xlsx"
+		"#);
+		assert_eq!(parsed[0], Command::Link(Link {
+			file: "cards.xlsx".into(),
+			sheet: None,
+		}));
+	}
+
+	#[test]
+	fn link_with_sheet() {
+		let parsed = nan_deck_parse(r#"
+			LINK= "1SJdrYEP70GkcQ9vzmA7J-k4THJnsiQdGIxvZtUSJcwE!cards"
+		"#);
+		assert_eq!(parsed[0], Command::Link(Link {
+			file: "1SJdrYEP70GkcQ9vzmA7J-k4THJnsiQdGIxvZtUSJcwE".into(),
+			sheet: Some("cards".into()),
+		}));
+	}
 
 	#[test]
 	fn text_font() {
