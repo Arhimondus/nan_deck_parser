@@ -252,19 +252,19 @@ mod tests {
 			TEXTFONT="1-{(NAME)}",[NAME],0%,0%,100%,100%,CENTER,TOP,0,100,Arial,14,T,#CC9900
 		"#);
 		assert_eq!(parsed[0], Command::TextFont(TextFont { 
-			col_path: "1-{(NAME)}".into(), 
-			name: "NAME".into(), 
-			left: Numeric::Percentage(0), 
-			top: Numeric::Percentage(0), 
-			width: Numeric::Percentage(100), 
-			height: Numeric::Percentage(100), 
-			horizontal_align: HorizontalAlign::Center, 
-			vertical_align: VerticalAlign::Top, 
-			rotation: 0, 
-			alpha: 100, 
-			font_name: "Arial".into(), 
-			font_size: 14, 
-			effect: Effect("t".into()), 
+			col_path: "1-{(NAME)}".into(),
+			name: "NAME".into(),
+			left: Numeric::Percentage(0),
+			top: Numeric::Percentage(0),
+			width: Numeric::Percentage(100),
+			height: Numeric::Percentage(100),
+			horizontal_align: HorizontalAlign::Center,
+			vertical_align: VerticalAlign::Top,
+			rotation: 0,
+			alpha: 100,
+			font_name: "Arial".into(),
+			font_size: 14,
+			effect: Effect("t".into()),
 			color: Color("#cc9900".into())
 		}));
 	}
@@ -275,19 +275,19 @@ mod tests {
 			TEXTFONT="1-{(NAME)}",[NAME],-5%,2%,125%,145%,LEFT,WWTOP,45,99,Arial,16,T
 		"#);
 		assert_eq!(parsed[0], Command::TextFont(TextFont { 
-			col_path: "1-{(NAME)}".into(), 
-			name: "NAME".into(), 
-			left: Numeric::Percentage(-5), 
-			top: Numeric::Percentage(2), 
-			width: Numeric::Percentage(125), 
-			height: Numeric::Percentage(145), 
-			horizontal_align: HorizontalAlign::Left, 
-			vertical_align: VerticalAlign::WwTop, 
-			rotation: 45, 
-			alpha: 99, 
-			font_name: "Arial".into(), 
-			font_size: 16, 
-			effect: Effect("t".into()), 
+			col_path: "1-{(NAME)}".into(),
+			name: "NAME".into(),
+			left: Numeric::Percentage(-5),
+			top: Numeric::Percentage(2),
+			width: Numeric::Percentage(125),
+			height: Numeric::Percentage(145),
+			horizontal_align: HorizontalAlign::Left,
+			vertical_align: VerticalAlign::WwTop,
+			rotation: 45,
+			alpha: 99,
+			font_name: "Arial".into(),
+			font_size: 16,
+			effect: Effect("t".into()),
 			color: Color("black".into())
 		}));
 	}
