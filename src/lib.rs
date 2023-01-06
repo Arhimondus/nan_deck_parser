@@ -1,8 +1,8 @@
 #[derive(PartialEq, Debug)]
-pub struct Effect(String);
+pub struct Effect(pub String);
 
 #[derive(PartialEq, Debug)]
-pub struct Color(String);
+pub struct Color(pub String);
 
 #[derive(PartialEq, Debug)]
 pub enum Unit {
@@ -19,9 +19,9 @@ pub enum Orientation {
 
 #[derive(PartialEq, Debug)]
 pub struct Page {
-	width: u32,
-	height: u32,
-	orientation: Orientation,
+	pub width: u32,
+	pub height: u32,
+	pub orientation: Orientation,
 }
 
 #[derive(PartialEq, Debug)]
@@ -32,19 +32,19 @@ pub enum BorderType {
 
 #[derive(PartialEq, Debug)]
 pub struct Border {
-	r#type: BorderType,
-	color: Color,
-	size: u8,
+	pub r#type: BorderType,
+	pub color: Color,
+	pub size: u8,
 }
 
 #[derive(PartialEq, Debug)]
 pub struct Image {
-	col_path: String,
-	name: String,
-	left: Numeric,
-	top: Numeric,
-	width: Numeric,
-	height: Numeric,
+	pub col_path: String,
+	pub name: String,
+	pub left: Numeric,
+	pub top: Numeric,
+	pub width: Numeric,
+	pub height: Numeric,
 }
 
 #[derive(PartialEq, Debug)]
@@ -66,26 +66,26 @@ pub enum VerticalAlign {
 
 #[derive(PartialEq, Debug)]
 pub struct TextFont {
-	col_path: String,
-	name: String,
-	left: Numeric,
-	top: Numeric,
-	width: Numeric,
-	height: Numeric,
-	horizontal_align: HorizontalAlign,
-	vertical_align: VerticalAlign,
-	rotation: i32,
-	alpha: u32,
-	font_name: String,
-	font_size: u8,
-	effect: Effect,
-	color: Color,
+	pub col_path: String,
+	pub name: String,
+	pub left: Numeric,
+	pub top: Numeric,
+	pub width: Numeric,
+	pub height: Numeric,
+	pub horizontal_align: HorizontalAlign,
+	pub vertical_align: VerticalAlign,
+	pub rotation: i32,
+	pub alpha: u32,
+	pub font_name: String,
+	pub font_size: u8,
+	pub effect: Effect,
+	pub color: Color,
 }
 
 #[derive(PartialEq, Debug)]
 pub struct Visual {
-	horizontal_step: u32,
-	vertical_step: u32,
+	pub horizontal_step: u32,
+	pub vertical_step: u32,
 }
 
 #[derive(PartialEq, Debug)]
@@ -103,8 +103,8 @@ pub enum Command {
 
 #[derive(PartialEq, Debug)]
 pub struct Link {
-	file: String,
-	sheet: Option<String>,
+	pub file: String,
+	pub sheet: Option<String>,
 }
 
 fn linkmulti(value: &str) -> Command {
@@ -171,7 +171,7 @@ fn visual(value: &str) -> Command {
 }
 
 #[derive(PartialEq, Debug)]
-enum Numeric {
+pub enum Numeric {
 	Absolute(i32),
 	Percentage(i32),
 }

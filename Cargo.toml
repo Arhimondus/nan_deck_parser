@@ -1,6 +1,6 @@
 [package]
 name = "nan_deck_parser"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Artemiy Boykov", "<arhimondus@gmail.com>"]
 repository = "https://github.com/Arhimondus/nan_deck_parser"
