@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 #[derive(PartialEq, Debug)]
 pub struct Effect(pub String);
 
@@ -168,6 +170,29 @@ fn visual(value: &str) -> Command {
 		horizontal_step: splitted[1].trim().parse().unwrap(),
 		vertical_step: splitted[2].trim().parse().unwrap(),
 	})
+}
+
+impl<'a, 'b> Add<&'b Numeric> for &'a Numeric {
+	type Output = Numeric;
+
+	fn add(self, other: &'b Numeric) -> Numeric {
+		match self {
+			Numeric::Absolute(value) => {
+				if let Numeric::Absolute(other_value) = other {
+					Numeric::Absolute(value + other_value)
+				} else {
+					panic!("Cannot add different types of Numeric")
+				}
+			},
+			Numeric::Percentage(value) => {
+				if let Numeric::Percentage(other_value) = other {
+					Numeric::Percentage(value + other_value)
+				} else {
+					panic!("Cannot add different types of Numeric")
+				}
+			},
+		}
+	}
 }
 
 #[derive(PartialEq, Debug)]
